@@ -3,13 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clear Local Storage</title>
-  <script>
-    // Clear all localStorage items right away
-    localStorage.clear();
-  </script>
+  <title>Go to Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .setup-box {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 16px;
+    }
+    select, input {
+      background-color: #333;
+      color: white;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>All localStorage items have been cleared.</h1>
+  <div class="setup-box">
+    <button onclick="location.href='../admin/admin.html'">Go to Admin</button>
+  </div>
 </body>
 </html>
