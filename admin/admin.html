@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Clear Local Storage with Password Modal</title>
+<title>Clear Local Storage with Password Confirmation</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -56,56 +56,120 @@
 </head>
 <body>
 
-<div class="setup-box" id="modalContent">
+<!-- Initial password modal -->
+<div class="setup-box" id="passwordModal">
   <h2>Enter Password to Reset</h2>
   <input type="password" id="passwordInput" placeholder="Password" autofocus />
   <button id="submitBtn">Submit</button>
   <div id="errorMessage" style="color: #f55; min-height: 1.2em; margin-top: 10px;"></div>
-  <div id="actionButtons" style="display:none;">
-    <button id="goHome">Go Home</button>
+  <div id="goHomeContainer" style="display:none;">
+    <button id="goHomeBtn">Go Home</button>
   </div>
+</div>
+
+<!-- Confirmation modal -->
+<div class="setup-box" id="confirmModal" style="display:none;">
+  <h2>Confirm Reset</h2>
+  <p>Are you sure you want to reset local storage? This action cannot be undone.</p>
+  <button id="confirmBtn">Yes, Reset</button>
+  <button id="cancelBtn" style="background-color:#555; margin-top:10px;">Cancel</button>
+</div>
+
+<!-- Success modal -->
+<div class="setup-box" id="successModal" style="display:none;">
+  <h2>Reset Complete</h2>
+  <p>Local storage has been cleared successfully.</p>
+  <button id="finalGoHomeBtn">Go Home</button>
 </div>
 
 <script>
   const PASSWORD = "yourpassword"; // Change to your desired password
+
+  // Elements
+  const passwordModal = document.getElementById('passwordModal');
+  const confirmModal = document.getElementById('confirmModal');
+  const successModal = document.getElementById('successModal');
+
   const passwordInput = document.getElementById('passwordInput');
   const submitBtn = document.getElementById('submitBtn');
   const errorMessage = document.getElementById('errorMessage');
-  const actionButtons = document.getElementById('actionButtons');
-  const goHomeBtn = document.getElementById('goHome');
+  const goHomeContainer = document.getElementById('goHomeContainer');
+  const goHomeBtn = document.getElementById('goHomeBtn');
 
-  function clearLocalStorageAndRedirect() {
-    localStorage.clear();
-    window.location.href = '../index.html';
+  const confirmBtn = document.getElementById('confirmBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+
+  const finalGoHomeBtn = document.getElementById('finalGoHomeBtn');
+
+  function showPasswordModal() {
+    passwordModal.style.display = 'block';
+    confirmModal.style.display = 'none';
+    successModal.style.display = 'none';
+    errorMessage.textContent = '';
+    goHomeContainer.style.display = 'none';
+    passwordInput.style.display = 'block';
+    submitBtn.style.display = 'block';
+    passwordInput.value = '';
+    passwordInput.focus();
+  }
+
+  function showConfirmModal() {
+    passwordModal.style.display = 'none';
+    confirmModal.style.display = 'block';
+    successModal.style.display = 'none';
+  }
+
+  function showSuccessModal() {
+    passwordModal.style.display = 'none';
+    confirmModal.style.display = 'none';
+    successModal.style.display = 'block';
   }
 
   function showError() {
     errorMessage.textContent = "Password incorrect. You may go home.";
-    actionButtons.style.display = "block";
-    passwordInput.style.display = "none";
-    submitBtn.style.display = "none";
+    goHomeContainer.style.display = 'block';
+    passwordInput.style.display = 'none';
+    submitBtn.style.display = 'none';
   }
 
+  // Initial submit handler
   submitBtn.addEventListener('click', () => {
-    const entered = passwordInput.value;
-    if (entered === PASSWORD) {
-      clearLocalStorageAndRedirect();
+    if(passwordInput.value === PASSWORD) {
+      showConfirmModal();
     } else {
       showError();
     }
   });
 
+  // Enter key for password input
   passwordInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       submitBtn.click();
     }
   });
 
+  // Cancel confirmation -> back to password modal
+  cancelBtn.addEventListener('click', () => {
+    showPasswordModal();
+  });
+
+  // Confirm reset -> clear storage, show success modal
+  confirmBtn.addEventListener('click', () => {
+    localStorage.clear();
+    showSuccessModal();
+  });
+
+  // Go home buttons redirect
   goHomeBtn.addEventListener('click', () => {
     window.location.href = '../index.html';
   });
 
-  passwordInput.focus();
+  finalGoHomeBtn.addEventListener('click', () => {
+    window.location.href = '../index.html';
+  });
+
+  // Start on password modal
+  showPasswordModal();
 </script>
 
 </body>
