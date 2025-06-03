@@ -165,6 +165,17 @@
   </div>
 
  <script>
+
+    const device = localStorage.getItem('userDevice');
+
+  if (device) {
+    // Device was already set up
+    window.location.href = "home/home.html";
+  } else {
+    // No device selected yet
+    window.location.href = "setup.html";
+  }
+   
   window.onload = function () {
     const container = document.getElementById('container');
     container.style.display = 'block';
