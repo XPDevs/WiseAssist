@@ -155,15 +155,31 @@
       document.getElementById('accountSetup').style.display = 'block';
     }
 
+    function generateRandomId(length = 12) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
     function saveAccount() {
       const email = document.getElementById('emailInput').value.trim();
       if (!email || !validateEmail(email)) {
         showModal("Please enter a valid email address.");
         return;
       }
+
+      const userId = generateRandomId();
+      const deviceId = generateRandomId();
+
       localStorage.setItem('userDevice', selectedDevice);
       localStorage.setItem('userName', userName);
       localStorage.setItem('userEmail', email);
+      localStorage.setItem('userId', userId);
+      localStorage.setItem('deviceId', deviceId);
+
       window.location.href = "home/home.html";
     }
 
