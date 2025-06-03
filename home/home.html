@@ -10,11 +10,42 @@
       background-color: #000;
       color: white;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start; /* align left */
       align-items: center;
       height: 100vh;
       margin: 0;
       position: relative;
+      padding-left: 20px; /* spacing from left edge */
+    }
+
+    /* Calls button */
+    .calls-btn {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-right: auto;
+    }
+    .calls-btn:hover {
+      background-color: #0056b3;
+    }
+    .calls-btn img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+      filter: invert(100%);
+      pointer-events: none;
     }
 
     /* User icon button */
@@ -80,6 +111,12 @@
   </style>
 </head>
 <body>
+
+  <button class="calls-btn" id="callsBtn" aria-label="Calls">
+    <img src="../assets/phone-icon.png" alt="Calls Icon" />
+    Calls
+  </button>
+
   <button class="user-icon-btn" id="userIconBtn" aria-label="User menu">
     <img src="../assets/user-icon.png" alt="User Icon" />
   </button>
@@ -92,6 +129,7 @@
   <script>
     const userIconBtn = document.getElementById('userIconBtn');
     const popoutMenu = document.getElementById('popoutMenu');
+    const callsBtn = document.getElementById('callsBtn');
 
     userIconBtn.addEventListener('click', () => {
       const isShown = popoutMenu.classList.toggle('show');
@@ -104,6 +142,10 @@
         popoutMenu.classList.remove('show');
         popoutMenu.setAttribute('aria-hidden', 'true');
       }
+    });
+
+    callsBtn.addEventListener('click', () => {
+      location.href = '../calls/calls.html';
     });
   </script>
 </body>
