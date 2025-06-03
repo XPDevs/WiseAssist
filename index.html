@@ -99,17 +99,16 @@
       font-size: 20px;
       cursor: pointer;
     }
-#versionNumber {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 14px;
-  font-family: Arial, sans-serif;
-  pointer-events: none; /* So it doesn't interfere with clicks */
-}
-
+    #versionNumber {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -127,18 +126,6 @@
     <div class="modal-content" style="background: black; color: white;">
       <div class="spinner"></div>
       <p>Getting ready, Please wait</p>
-    </div>
-  </div>
-
-  <!-- Internet Error Modal -->
-  <div class="modal" id="internetErrorModal">
-    <div class="modal-content">
-      <h3>Application Error</h3>
-      <p>The application encountered an error and cannot be started at this time.</p>
-      <p>Please try again later or contact XPDevs for support.</p>
-      <button id="closeAppBtn" style="margin-top: 15px; padding: 10px; background-color: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        Close Application
-      </button>
     </div>
   </div>
 
@@ -177,22 +164,6 @@
     </div>
   </div>
 
-  <!-- Developer Options Modal -->
-  <div class="modal" id="developerOptionsModal">
-    <div class="modal-content">
-      <button class="close-btn" id="closeDevOptionsBtn">&times;</button>
-      <h3>Developer Options</h3>
-      <p>Welcome, developer!</p>
-      <ul style="text-align: left;">
-        <li>Debug Logging: <code>console.log</code> enabled</li>
-        <li>Bypass Checks</li>
-        <li>Offline Start Mode</li>
-        <li>Custom Boot Flag: <code>--dev</code></li>
-      </ul>
-      <button onclick="alert('Developer Mode Activated')" style="margin-top: 10px; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Activate</button>
-    </div>
-  </div>
-
   <script>
     window.onload = function () {
       const container = document.getElementById('container');
@@ -200,51 +171,25 @@
       container.style.animation = 'fadeIn 1s forwards';
     };
 
-    document.getElementById('getStartedBtn').onclick = function (event) {
-      if (event.shiftKey) {
-        document.getElementById('developerOptionsModal').style.display = 'flex';
-        return;
-      }
-
+    document.getElementById('getStartedBtn').onclick = function () {
       document.getElementById('spinnerModal').style.display = 'flex';
 
       setTimeout(function () {
-        if (navigator.onLine) {
-          document.getElementById('spinnerModal').style.display = 'none';
-          document.getElementById('internetErrorModal').style.display = 'flex';
-        } else {
-          alert("You're offline, proceeding...");
-          // Add your offline startup logic here
-        }
-      }, 5000);
+        // Hide all content, show black screen
+        document.body.innerHTML = '';
+        document.body.style.backgroundColor = 'black';
+      }, 3000);
     };
 
-    // Attempt to close the browser tab/window
-    document.getElementById('closeAppBtn').onclick = function () {
-      window.open('', '_self'); // workaround for some browsers
-      window.close();
-      setTimeout(() => {
-        console.log("Please close the tab manually. Your browser has blocked auto-close.");
-      }, 200);
-    };
-
-    // Privacy Policy link
     document.getElementById('privacyPolicyLink').onclick = function (event) {
       event.preventDefault();
       document.getElementById('privacyPolicyModal').style.display = 'flex';
     };
 
-    // Close Privacy Modal
     document.getElementById('closePrivacyBtn').onclick = function () {
       document.getElementById('privacyPolicyModal').style.display = 'none';
     };
 
-    // Close Developer Options Modal
-    document.getElementById('closeDevOptionsBtn').onclick = function () {
-      document.getElementById('developerOptionsModal').style.display = 'none';
-    };
-
-    // Allow clicking outside of spinner to close it (optional)
     window.onclick = function (event) {
       const spinnerModal = document.getElementById('spinnerModal');
       if (event.target === spinnerModal) {
@@ -252,7 +197,7 @@
       }
     };
   </script>
-<!-- Add this inside <body>, at the very end before </body> -->
-<div id="versionNumber">V1.0.0</div>
+
+  <div id="versionNumber">V1.0.0</div>
 </body>
 </html>
