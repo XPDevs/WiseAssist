@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Searching for index.html...</title>
+  <script>
+    async function checkIndex(path) {
+      try {
+        const response = await fetch(path + 'index.html', { method: 'HEAD' });
+        return response.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    async function findIndex() {
+      let path = '';
+      for (let i = 0; i <= 5; i++) {
+        const found = await checkIndex(path);
+        if (found) {
+          window.location.href = path + 'index.html';
+          return;
+        }
+        path = '../' + path;
+      }
+
+      // If not found after 5 layers
+      document.body.innerHTML = `
+        <h1 style="color: white; text-align: center; padding-top: 20%;">index.html not found in current or parent directories</h1>
+      `;
+    }
+
+    findIndex();
+  </script>
+</head>
+<body style="background-color: black;">
+</body>
+</html>
