@@ -164,39 +164,38 @@
     </div>
   </div>
 
-  <script>
-    window.onload = function () {
-      const container = document.getElementById('container');
-      container.style.display = 'block';
-      container.style.animation = 'fadeIn 1s forwards';
-    };
+ <script>
+  window.onload = function () {
+    const container = document.getElementById('container');
+    container.style.display = 'block';
+    container.style.animation = 'fadeIn 1s forwards';
+  };
 
-    document.getElementById('getStartedBtn').onclick = function () {
-      document.getElementById('spinnerModal').style.display = 'flex';
+  document.getElementById('getStartedBtn').onclick = function () {
+    document.getElementById('spinnerModal').style.display = 'flex';
 
-      setTimeout(function () {
-        // Hide all content, show black screen
-        document.body.innerHTML = '';
-        document.body.style.backgroundColor = 'black';
-      }, 3000);
-    };
+    setTimeout(function () {
+      window.location.href = 'setup.html';
+    }, 3000);
+  };
 
-    document.getElementById('privacyPolicyLink').onclick = function (event) {
-      event.preventDefault();
-      document.getElementById('privacyPolicyModal').style.display = 'flex';
-    };
+  document.getElementById('privacyPolicyLink').onclick = function (event) {
+    event.preventDefault();
+    document.getElementById('privacyPolicyModal').style.display = 'flex';
+  };
 
-    document.getElementById('closePrivacyBtn').onclick = function () {
-      document.getElementById('privacyPolicyModal').style.display = 'none';
-    };
+  document.getElementById('closePrivacyBtn').onclick = function () {
+    document.getElementById('privacyPolicyModal').style.display = 'none';
+  };
 
-    window.onclick = function (event) {
-      const spinnerModal = document.getElementById('spinnerModal');
-      if (event.target === spinnerModal) {
-        spinnerModal.style.display = 'none';
-      }
-    };
-  </script>
+  window.onclick = function (event) {
+    const spinnerModal = document.getElementById('spinnerModal');
+    if (event.target === spinnerModal) {
+      spinnerModal.style.display = 'none';
+    }
+  };
+</script>
+
 
   <div id="versionNumber">V1.2.0</div>
 </body>
