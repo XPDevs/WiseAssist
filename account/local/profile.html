@@ -56,6 +56,7 @@
     .info-table div {
       margin: 8px 0;
       font-size: 16px;
+      word-wrap: break-word;
     }
 
     .label {
@@ -87,12 +88,14 @@
 <body>
 
   <div class="profile-box">
-    <img src="../../assets/user-icon.png" alt="User Icon" class="profile-image">
+    <img src="../assets/user-icon.png" alt="User Icon" class="profile-image">
     <div class="user-name" id="profileName">Loading...</div>
 
     <div class="info-table">
       <div><span class="label">Email:</span><span id="profileEmail">Loading...</span></div>
       <div><span class="label">Device:</span><span id="profileDevice">Loading...</span></div>
+      <div><span class="label">User ID:</span><span id="profileUserId">Loading...</span></div>
+      <div><span class="label">Device ID:</span><span id="profileDeviceId">Loading...</span></div>
     </div>
   </div>
 
@@ -102,10 +105,14 @@
     const device = localStorage.getItem('userDevice') || "Not set";
     const name = localStorage.getItem('userName') || "Not set";
     const email = localStorage.getItem('userEmail') || "Not set";
+    const userId = localStorage.getItem('userId') || "Not set";
+    const deviceId = localStorage.getItem('deviceId') || "Not set";
 
     document.getElementById('profileDevice').textContent = device;
     document.getElementById('profileName').textContent = name;
     document.getElementById('profileEmail').textContent = email;
+    document.getElementById('profileUserId').textContent = userId;
+    document.getElementById('profileDeviceId').textContent = deviceId;
   </script>
 
 </body>
