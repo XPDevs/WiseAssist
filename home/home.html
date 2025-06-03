@@ -16,10 +16,6 @@
       margin: 0;
       position: relative;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
 
     /* User icon button */
     .user-icon-btn {
@@ -51,12 +47,13 @@
       right: 15px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
       transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
       z-index: 1000;
+      border-radius: 8px;
+      overflow: hidden;
     }
     .popout-menu.show {
       opacity: 1;
@@ -67,12 +64,15 @@
       width: 120px;
       background-color: #555;
       color: white;
-      border-radius: 6px;
       font-size: 14px;
-      padding: 8px;
+      padding: 10px;
       cursor: pointer;
       border: none;
       text-align: left;
+      border-bottom: 1px solid #444;
+    }
+    .popout-menu button:last-child {
+      border-bottom: none;
     }
     .popout-menu button:hover {
       background-color: #777;
@@ -99,7 +99,7 @@
       popoutMenu.setAttribute('aria-hidden', !isShown);
     });
 
-    // Click outside to close menu
+    // Close on outside click
     document.addEventListener('click', (e) => {
       if (!userIconBtn.contains(e.target) && !popoutMenu.contains(e.target)) {
         popoutMenu.classList.remove('show');
