@@ -29,20 +29,19 @@
     to { opacity: 1; transform: translateY(0); }
   }
   select, input, button {
-    width: 100%;
+    box-sizing: border-box;
+    width: 80%;
     padding: 10px;
-    margin-top: 10px;
+    margin: 10px auto 0 auto;
     border-radius: 4px;
     border: none;
     font-size: 16px;
-  }
-  select, input {
+    display: block;
     background-color: #333;
     color: white;
   }
   button {
     background-color: #007bff;
-    color: white;
     cursor: pointer;
   }
   button:hover {
