@@ -11,11 +11,12 @@
       color: white;
       display: flex;
       justify-content: flex-start; /* align left */
-      align-items: center;
+      align-items: flex-start; /* align top */
       height: 100vh;
       margin: 0;
       position: relative;
       padding-left: 20px; /* spacing from left edge */
+      padding-top: 20px; /* spacing from top */
     }
 
     /* Calls button */
@@ -35,7 +36,7 @@
       padding: 10px;
       font-size: 16px;
       transition: background-color 0.3s ease;
-      margin-right: auto;
+      /* margin-right: auto;  remove this */
     }
     .calls-btn:hover {
       background-color: #0056b3;
